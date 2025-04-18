@@ -4,12 +4,13 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Index - OnePage Bootstrap Template</title>
+  <title>FacuLock</title>
+  
   <meta name="description" content="">
   <meta name="keywords" content="">
 
   <!-- Favicons -->
-  <link href="template/landingpage/assets/img/favicon.png" rel="icon">
+  <link rel="shortcut icon" type="image/png" href="template/auth/assets/images/logos/seodashlogo.png" />
   <link href="template/landingpage/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Fonts -->
