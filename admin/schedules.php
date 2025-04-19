@@ -1,3 +1,21 @@
+<?php
+  include('../db_connection/conn.php');
+
+  $addStatus = '';
+  if (isset($_GET['addStatus'])) {
+      $addStatus = $_GET['addStatus'];
+  }
+
+  $editStatus = '';
+  if(isset($_GET['editStatus'])) {
+      $editStatus = $_GET['editStatus'];
+  }
+
+  $deleteStatus = '';
+  if(isset($_GET['deleteStatus'])) {
+      $deleteStatus = $_GET['deleteStatus'];
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <!-- [Head] start -->
@@ -374,10 +392,476 @@
       </div>
       <!-- [ breadcrumb ] end -->
       <!-- [ Main Content ] start -->
-            <div class="row">
+      <div class="row">
                     <!-- start sa code -->
+                    <div class="col-xxl-12 col-md-12">
+                    <div class="card-header">
+                    <h5>Teacher Schedule Table</h5>
+                    <small>Manage and organize teacher schedules efficiently using the table below.</small>
+        <div class="d-flex justify-content-end">
+  
+ 
 
-                    <!-- end sa code     -->
+        <select id="sort-date" class="form-select form-select-sm me-2" style="width: auto;" onchange="sortByDate()">
+          <option value="" <?php echo (!isset($_GET['sort_date']) ? 'selected' : ''); ?>>Sort by Date</option>
+          <option value="ASC" <?php echo (isset($_GET['sort_date']) && $_GET['sort_date'] == 'ASC' ? 'selected' : ''); ?>>Oldest First</option>
+          <option value="DESC" <?php echo (isset($_GET['sort_date']) && $_GET['sort_date'] == 'DESC' ? 'selected' : ''); ?>>Newest First</option>
+        </select>
+
+        <!-- Dropdown for filtering by department -->
+        <select id="filter-department" class="form-select form-select-sm me-2" style="width: auto;" onchange="filterByDepartment()">
+          <option value="" <?php echo (!isset($_GET['filter_department']) ? 'selected' : ''); ?>>Filter by Department</option>
+          <?php
+            $dept_sql = "SELECT DISTINCT department FROM schedules";
+            $dept_result = mysqli_query($conn, $dept_sql);
+            while ($dept_row = mysqli_fetch_assoc($dept_result)) {
+              $selected = (isset($_GET['filter_department']) && $_GET['filter_department'] == $dept_row['department']) ? 'selected' : '';
+              echo '<option value="' . $dept_row['department'] . '" ' . $selected . '>' . $dept_row['department'] . '</option>';
+            }
+          ?>
+        </select>
+
+        <!-- Add Schedule Button -->
+        <button class="btn btn-success btn-sm" style="border-radius: 5px;" data-bs-toggle="modal" data-bs-target="#addScheduleModal">
+          Add Schedule
+        </button>
+
+        <!-- Add Schedule Modal -->
+        <div class="modal fade" id="addScheduleModal" tabindex="-1" aria-labelledby="addScheduleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg"> <!-- Use modal-lg for a larger modal -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addScheduleModalLabel">Add New Schedule</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="../backend/add_schedule.php" method="POST">
+          <div class="row">
+            <!-- Course Code and Course Number -->
+            <div class="col-md-6 mb-3">
+              <label for="course_code" class="form-label">Course Code</label>
+              <input type="text" class="form-control" name="course_code" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="course_number" class="form-label">Course Number</label>
+              <input type="text" class="form-control" name="course_number" required>
+            </div>
+          </div>
+          <div class="row">
+            <!-- Units and Faculty Teacher -->
+            <div class="col-md-6 mb-3">
+              <label for="units" class="form-label">Units</label>
+              <input type="number" class="form-control" name="units" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="faculty_teacher" class="form-label">Faculty Teacher</label>
+              <input type="text" class="form-control" name="faculty_teacher" required>
+            </div>
+          </div>
+          <div class="row">
+            <!-- Subject Name and Size -->
+            <div class="col-md-6 mb-3">
+              <label for="subject_name" class="form-label">Subject Name</label>
+              <input type="text" class="form-control" name="subject_name" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="size" class="form-label">Size</label>
+              <input type="number" class="form-control" name="size" required>
+            </div>
+          </div>
+          <div class="row">
+            <!-- Schedule -->
+            <div class="col-md-12 mb-3">
+              <label for="schedule" class="form-label">Schedule</label>
+              <input type="text" class="form-control" name="schedule" required>
+            </div>
+          </div>
+          <div class="row">
+            <!-- Department and College -->
+            <div class="col-md-6 mb-3">
+              <label for="department" class="form-label">Department</label>
+              <input type="text" class="form-control" name="department" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="college" class="form-label">College</label>
+              <input type="text" class="form-control" name="college" required>
+            </div>
+          </div>
+          <div class="text-end">
+            <button type="submit" class="btn btn-primary">Add Schedule</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+  </div>
+</div>
+
+<div class="card-body">
+  <table id="left-right-fix" class="table stripe row-border order-column">
+    <thead>
+      <tr>
+        <th>Course Code</th>
+        <th>Course Number</th>
+        <th>Units</th>
+        <th>Faculty Teacher</th>
+        <th>Subject Name</th>
+        <th>Size</th>
+        <th>Schedule</th>
+        <th>Department</th>
+        <th>College</th>
+        <th class="text-center">Action</th>
+      </tr>
+    </thead>
+    <tbody id="schedule-table-body">
+      <?php
+        $sql = "SELECT * FROM schedules WHERE id IS NOT NULL"; // Base query
+
+        // Filter by department
+        if (isset($_GET['filter_department']) && !empty($_GET['filter_department'])) {
+          $filter_department = mysqli_real_escape_string($conn, $_GET['filter_department']);
+          $sql .= " AND department = '$filter_department'";
+        }
+
+        // Sort by schedule
+        
+        if (isset($_GET['sort_date']) && in_array($_GET['sort_date'], ['ASC', 'DESC'])) {
+          $sort_date = $_GET['sort_date'];
+          $sql .= " ORDER BY date_created $sort_date"; // Sort by created_at column
+        } else {
+          $sql .= " ORDER BY schedule ASC"; // Default sorting
+        }
+
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result) > 0) {
+          while ($row = mysqli_fetch_assoc($result)) {
+            echo "<tr>";
+            echo "<td>" . $row['course_code'] . "</td>";
+            echo "<td>" . $row['course_number'] . "</td>";
+            echo "<td>" . $row['units'] . "</td>";
+            echo "<td>" . $row['faculty_teacher'] . "</td>";
+            echo "<td>" . $row['subject_name'] . "</td>";
+            echo "<td>" . $row['size'] . "</td>";
+            echo "<td>" . $row['schedule'] . "</td>";
+            echo "<td>" . $row['department'] . "</td>";
+            echo "<td>" . $row['college'] . "</td>";
+            echo '<td class="text-center">
+                    <!-- Edit Button -->
+                    <button class="btn btn-primary btn-sm" style="border-radius: 5px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);" data-bs-toggle="modal" data-bs-target="#editModal' . $row['id'] . '">Edit</button>
+                    
+                    <!-- Delete Button -->
+                    <button class="btn btn-danger btn-sm" style="border-radius: 5px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);" data-bs-toggle="modal" data-bs-target="#deleteModal' . $row['id'] . '">Delete</button>
+                  </td>';
+            echo "</tr>";
+
+            // Edit Modal
+            echo '
+            <!-- Edit Modal -->
+            <div class="modal fade" id="editModal' . $row['id'] . '" tabindex="-1" aria-labelledby="editModalLabel' . $row['id'] . '" aria-hidden="true">
+              <div class="modal-dialog modal-lg"> <!-- Use modal-lg for a larger modal -->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel' . $row['id'] . '">Edit Schedule</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form action="../backend/edit_schedule.php" method="POST">
+                      <input type="hidden" name="id" value="' . $row['id'] . '">
+                      <div class="row">
+                        <!-- Course Code and Course Number -->
+                        <div class="col-md-6 mb-3">
+                          <label for="course_code" class="form-label">Course Code</label>
+                          <input type="text" class="form-control" name="course_code" value="' . $row['course_code'] . '" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label for="course_number" class="form-label">Course Number</label>
+                          <input type="text" class="form-control" name="course_number" value="' . $row['course_number'] . '" required>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <!-- Units and Faculty Teacher -->
+                        <div class="col-md-6 mb-3">
+                          <label for="units" class="form-label">Units</label>
+                          <input type="number" class="form-control" name="units" value="' . $row['units'] . '" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label for="faculty_teacher" class="form-label">Faculty Teacher</label>
+                          <input type="text" class="form-control" name="faculty_teacher" value="' . $row['faculty_teacher'] . '" required>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <!-- Subject Name and Size -->
+                        <div class="col-md-6 mb-3">
+                          <label for="subject_name" class="form-label">Subject Name</label>
+                          <input type="text" class="form-control" name="subject_name" value="' . $row['subject_name'] . '" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label for="size" class="form-label">Size</label>
+                          <input type="number" class="form-control" name="size" value="' . $row['size'] . '" required>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <!-- Schedule -->
+                        <div class="col-md-12 mb-3">
+                          <label for="schedule" class="form-label">Schedule</label>
+                          <input type="text" class="form-control" name="schedule" value="' . $row['schedule'] . '" required>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <!-- Department and College -->
+                        <div class="col-md-6 mb-3">
+                          <label for="department" class="form-label">Department</label>
+                          <input type="text" class="form-control" name="department" value="' . $row['department'] . '" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <label for="college" class="form-label">College</label>
+                          <input type="text" class="form-control" name="college" value="' . $row['college'] . '" required>
+                        </div>
+                      </div>
+                      <div class="text-end">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>';
+
+            // Delete modal
+            echo '<div class="modal fade" id="deleteModal' . $row['id'] . '" tabindex="-1" aria-labelledby="deleteModalLabel' . $row['id'] . '" aria-hidden="true" style = "margin-top: 25vh;">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="deleteModalLabel' . $row['id'] . '">Delete Schedule</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          Are you sure you want to delete the schedule for <strong>' . $row['faculty_teacher'] . '</strong>?
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                          <a href="../backend/delete_schedule.php?id=' . $row['id'] . '" class="btn btn-danger">Delete</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>';
+          }
+        } else {
+          echo "<tr><td colspan='10'>No schedules found.</td></tr>";
+        }
+      ?>
+    </tbody>
+  </table>
+</div>
+
+<script>
+
+function sortByDate() {
+  const sortOrder = document.getElementById('sort-date').value;
+  const urlParams = new URLSearchParams(window.location.search);
+  if (sortOrder) {
+    urlParams.set('sort_date', sortOrder);
+  } else {
+    urlParams.delete('sort_date');
+  }
+  window.location.search = urlParams.toString();
+}
+
+function filterByDepartment() {
+  const department = document.getElementById('filter-department').value;
+  const urlParams = new URLSearchParams(window.location.search);
+  if (department) {
+    urlParams.set('filter_department', department);
+  } else {
+    urlParams.delete('filter_department');
+  }
+  window.location.search = urlParams.toString();
+}
+
+function filterByStatus() {
+  const status = document.getElementById('filter-status').value;
+  const urlParams = new URLSearchParams(window.location.search);
+  if (status) {
+    urlParams.set('filter_status', status);
+  } else {
+    urlParams.delete('filter_status');
+  }
+  window.location.search = urlParams.toString();
+}
+
+
+</script>
+          </div>
+
+          
+<div class="modal fade" id="approve_success" tabindex="-1" aria-labelledby="failModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center">
+      <div class="modal-header">
+        <h5 class="modal-title w-100 text-danger" id="failModalLabel">Approval Success</h5>
+      </div>
+      <div class="modal-body text-danger">
+        Account Approved Successfully!
+      </div>
+      <div class="modal-footer">
+      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="approve_failed" tabindex="-1" aria-labelledby="failModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center">
+      <div class="modal-header">
+        <h5 class="modal-title w-100 text-danger" id="failModalLabel">Approval Failed</h5>
+      </div>
+      <div class="modal-body text-danger">
+        Oops! Error Approving account
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Add Status Modal -->
+<div class="modal fade" id="addStatusModal" tabindex="-1" aria-labelledby="addStatusModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addStatusModalLabel">
+          <?php
+          // Display the appropriate title based on the addStatus value
+          if ($addStatus == 'success') {
+            echo 'Schedule Added Successfully';
+          } elseif ($addStatus == 'fail') {
+            echo 'Failed to Add Schedule';
+          } elseif ($addStatus == 'uncompleteData') {
+            echo 'Incomplete Data';
+          }
+          ?>
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <?php
+        // Display the appropriate message based on the addStatus value
+        if ($addStatus == 'success') {
+          echo 'The schedule has been successfully added to the database.';
+        } elseif ($addStatus == 'fail') {
+          echo 'There was an error adding the schedule. Please try again.';
+        } elseif ($addStatus == 'uncompleteData') {
+          echo 'Please fill in all required fields before submitting.';
+        }
+        ?>
+      </div>
+      <div class="modal-footer">
+        <a href="schedules.php" class="btn btn-success">Close</a>
+       
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- editStatus Modal -->
+<div class="modal fade" id="editStatusModal" tabindex="-1" aria-labelledby="addStatusModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addStatusModalLabel">
+          <?php
+          // Display the appropriate title based on the addStatus value
+          if ($editStatus == 'success') {
+            echo 'Schedule Edited Successfully';
+          } elseif ($editStatus == 'fail') {
+            echo 'Failed to Edit Schedule';
+          }
+          ?>
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <?php
+        // Display the appropriate message based on the addStatus value
+        if ($editStatus == 'success') {
+          echo 'The schedule has been successfully edited in the database.';
+        } elseif ($editStatus == 'fail') {
+          echo 'There was an error editing a schedule. Please try again.';
+        }
+        ?>
+      </div>
+      <div class="modal-footer">
+        <a href="schedules.php" class="btn btn-success">Close</a>
+       
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- deleteStatus Modal -->
+<div class="modal fade" id="deleteStatusModal" tabindex="-1" aria-labelledby="addStatusModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addStatusModalLabel">
+          <?php
+          // Display the appropriate title based on the addStatus value
+          if ($deleteStatus == 'success') {
+            echo 'Schedule Deleted Successfully';
+          } elseif ($deleteStatus == 'fail') {
+            echo 'Failed to Delete Schedule';
+          }
+          ?>
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <?php
+        // Display the appropriate message based on the addStatus value
+        if ($deleteStatus == 'success') {
+          echo 'The schedule has been successfully deleted in the database.';
+        } elseif ($deleteStatus == 'fail') {
+          echo 'There was an error deleting a schedule. Please try again.';
+        }
+        ?>
+      </div>
+      <div class="modal-footer">
+        <a href="schedules.php" class="btn btn-success">Close</a>
+       
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Check if the addStatus parameter exists
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('addStatus')) {
+      const addStatusModal = new bootstrap.Modal(document.getElementById('addStatusModal'));
+      addStatusModal.show();
+    }else if(urlParams.has('editStatus')){
+      const editStatusModal = new bootstrap.Modal(document.getElementById('editStatusModal'));
+      editStatusModal.show();
+    }else if(urlParams.has('deleteStatus')){
+      const deleteStatusModal = new bootstrap.Modal(document.getElementById('deleteStatusModal'));
+      deleteStatusModal.show();
+    }
+  });
+
+</script>
+              <!-- end sa code     -->
             </div>
     </div>
   </div>

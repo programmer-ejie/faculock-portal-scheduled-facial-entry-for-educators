@@ -1,3 +1,6 @@
+<?php
+  include('../db_connection/conn.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <!-- [Head] start -->
@@ -374,8 +377,227 @@
       <!-- [ Main Content ] start -->
             <div class="row">
                     <!-- start sa code -->
+                    <div class="col-xxl-12 col-md-12">
+                    <div class="card-header">
+        <h5>Account List Table Data</h5>
+        <small>Manage and sort account data efficiently using the table below.</small>
+        <div class="d-flex justify-content-end">
+  
+    <!-- Dropdown for sorting by date -->
+        <select id="filter-status" class="form-select form-select-sm me-2" style="width: auto;" onchange="filterByStatus()">
+          <option value="" <?php echo (!isset($_GET['filter_status']) ? 'selected' : ''); ?>>Filter by Status</option>
+          <option value="Pending" <?php echo (isset($_GET['filter_status']) && $_GET['filter_status'] == 'Pending' ? 'selected' : ''); ?>>Pending</option>
+          <option value="Approved" <?php echo (isset($_GET['filter_status']) && $_GET['filter_status'] == 'Approved' ? 'selected' : ''); ?>>Approved</option>
+        </select>
 
-                    <!-- end sa code     -->
+        <!-- Dropdown for sorting by date -->
+        <select id="sort-date" class="form-select form-select-sm me-2" style="width: auto;" onchange="sortByDate()">
+          <option value="" <?php echo (!isset($_GET['sort_date']) ? 'selected' : ''); ?>>Sort by Date</option>
+          <option value="ASC" <?php echo (isset($_GET['sort_date']) && $_GET['sort_date'] == 'ASC' ? 'selected' : ''); ?>>Oldest First</option>
+          <option value="DESC" <?php echo (isset($_GET['sort_date']) && $_GET['sort_date'] == 'DESC' ? 'selected' : ''); ?>>Newest First</option>
+        </select>
+
+        <!-- Dropdown for filtering by department -->
+        <select id="filter-department" class="form-select form-select-sm" style="width: auto;" onchange="filterByDepartment()">
+          <option value="" <?php echo (!isset($_GET['filter_department']) ? 'selected' : ''); ?>>Filter by Department</option>
+          <?php
+            $dept_sql = "SELECT DISTINCT faculty_department FROM users";
+            $dept_result = mysqli_query($conn, $dept_sql);
+            while ($dept_row = mysqli_fetch_assoc($dept_result)) {
+              $selected = (isset($_GET['filter_department']) && $_GET['filter_department'] == $dept_row['faculty_department']) ? 'selected' : '';
+              echo '<option value="' . $dept_row['faculty_department'] . '" ' . $selected . '>' . $dept_row['faculty_department'] . '</option>';
+            }
+          ?>
+        </select>
+  </div>
+</div>
+
+<div class="card-body">
+  <table id="left-right-fix" class="table stripe row-border order-column">
+    <thead>
+      <tr>
+        <th>Fullname</th>
+        <th>Gmail</th>
+        <th>Position</th>
+        <th>Age</th>
+        <th>Department</th>
+        <th>School</th>
+        <th>Date Created</th>
+        <th class = "text-center">Action</th>
+      </tr>
+    </thead>
+    <tbody id="account-table-body">
+      <?php
+
+        $sql = "SELECT * FROM users WHERE id IS NOT NULL"; // Base query
+
+        // Filter by status
+        if (isset($_GET['filter_status']) && !empty($_GET['filter_status'])) {
+          $filter_status = mysqli_real_escape_string($conn, $_GET['filter_status']);
+          $sql .= " AND status = '$filter_status'";
+        }
+
+        // Filter by department
+        if (isset($_GET['filter_department']) && !empty($_GET['filter_department'])) {
+          $filter_department = mysqli_real_escape_string($conn, $_GET['filter_department']);
+          $sql .= " AND faculty_department = '$filter_department'";
+        }
+
+        // Sort by date
+        if (isset($_GET['sort_date']) && in_array($_GET['sort_date'], ['ASC', 'DESC'])) {
+          $sort_date = $_GET['sort_date'];
+          $sql .= " ORDER BY date_created $sort_date";
+        } else {
+          $sql .= " ORDER BY date_created DESC"; // Default sorting
+        }
+
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result) > 0) {
+          while ($row = mysqli_fetch_assoc($result)) {
+            echo "<tr>";
+            echo "<td>" . $row['faculty_name'] . "</td>";
+            echo "<td>" . $row['faculty_gmail'] . "</td>";
+            echo "<td>" . $row['faculty_position'] . "</td>";
+            echo "<td>" . $row['faculty_age'] . "</td>";
+            echo "<td>" . $row['faculty_department'] . "</td>";
+            echo "<td>" . $row['faculty_school'] . "</td>";
+            echo "<td>" . $row['date_created'] . "</td>";
+           if($row['status'] == 'Pending'){
+            echo '<td class = "text-center">
+            <!-- Approve Button -->
+            <button class="btn btn-success btn-sm" style="border-radius: 5px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); padding: 10px 20px;" data-bs-toggle="modal" data-bs-target="#approveModal' . $row['id'] . '">Approve</button>
+            
+            <!-- Delete Button -->
+            <button class="btn btn-danger btn-sm" style="border-radius: 5px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); padding: 10px 20px;" data-bs-toggle="modal" data-bs-target="#deleteModal' . $row['id'] . '">Delete</button>
+          </td>';   
+           }else{
+            echo '<td class = "text-center">
+           
+            <!-- Delete Button -->
+            <button class="btn btn-danger btn-sm" style="width: 100%; border-radius: 5px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); padding: 10px 20px;" data-bs-toggle="modal" data-bs-target="#deleteModal' . $row['id'] . '">Delete</button>
+          </td>'; 
+           }
+
+           echo "</tr>";
+          
+//approve model 
+            echo '<div class="modal fade" id="approveModal' . $row['id'] . '" tabindex="-1" aria-labelledby="approveModalLabel' . $row['id'] . '" aria-hidden="true" style = "margin-top: 25vh;">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="approveModalLabel' . $row['id'] . '">Approve Account</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  Are you sure you want to approve the account for <strong>' . $row['faculty_name'] . '</strong>?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                  <a href="../backend/approve_account.php?id=' . $row['id'] . '" class="btn btn-success">Approve</a>
+                </div>
+              </div>
+            </div>
+          </div>';
+
+  //  delete modal
+    echo '<div class="modal fade" id="deleteModal' . $row['id'] . '" tabindex="-1" aria-labelledby="deleteModalLabel' . $row['id'] . '" aria-hidden="true" style = "margin-top: 25vh;">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="deleteModalLabel' . $row['id'] . '">Delete Account</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  Are you sure you want to delete the account for <strong>' . $row['faculty_name'] . '</strong>?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                  <a href="../backend/delete_account.php?id=' . $row['id'] . '" class="btn btn-success">Delete</a>
+                </div>
+              </div>
+            </div>
+          </div>';
+          }
+        } else {
+          echo "<tr><td colspan='8'>No pending accounts found.</td></tr>";
+        }
+      ?>
+    </tbody>
+  </table>
+</div>
+
+<script>
+
+function sortByDate() {
+  const sortOrder = document.getElementById('sort-date').value;
+  const urlParams = new URLSearchParams(window.location.search);
+  if (sortOrder) {
+    urlParams.set('sort_date', sortOrder);
+  } else {
+    urlParams.delete('sort_date');
+  }
+  window.location.search = urlParams.toString();
+}
+
+function filterByDepartment() {
+  const department = document.getElementById('filter-department').value;
+  const urlParams = new URLSearchParams(window.location.search);
+  if (department) {
+    urlParams.set('filter_department', department);
+  } else {
+    urlParams.delete('filter_department');
+  }
+  window.location.search = urlParams.toString();
+}
+
+function filterByStatus() {
+  const status = document.getElementById('filter-status').value;
+  const urlParams = new URLSearchParams(window.location.search);
+  if (status) {
+    urlParams.set('filter_status', status);
+  } else {
+    urlParams.delete('filter_status');
+  }
+  window.location.search = urlParams.toString();
+}
+
+
+</script>
+          </div>
+
+          
+<div class="modal fade" id="approve_success" tabindex="-1" aria-labelledby="failModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center">
+      <div class="modal-header">
+        <h5 class="modal-title w-100 text-danger" id="failModalLabel">Approval Success</h5>
+      </div>
+      <div class="modal-body text-danger">
+        Account Approved Successfully!
+      </div>
+      <div class="modal-footer">
+      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="approve_failed" tabindex="-1" aria-labelledby="failModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center">
+      <div class="modal-header">
+        <h5 class="modal-title w-100 text-danger" id="failModalLabel">Approval Failed</h5>
+      </div>
+      <div class="modal-body text-danger">
+        Oops! Error Approving account
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+              <!-- end sa code     -->
             </div>
     </div>
   </div>

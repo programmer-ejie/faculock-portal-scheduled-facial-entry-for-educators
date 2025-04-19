@@ -48,7 +48,7 @@
           <li><a href="#about">About</a></li>
           <li><a href="#team">Team</a></li>
           <li><a href="#services">Services</a></li>
-          <li><a href="#contact">Signup</a></li>
+          <li><a href="auth/register.php">Signup</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
