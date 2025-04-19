@@ -25,13 +25,13 @@ try:
     # Initialize FaceNet
     embedder = FaceNet()
 
-    # Load pre-saved embeddings
+    # Cache embeddings in memory
     embeddings_path = '../embeddings/user_embeddings.pkl'
-    if not os.path.exists(embeddings_path):
-        raise FileNotFoundError(f"Embeddings file not found: {embeddings_path}")
-
-    with open(embeddings_path, 'rb') as f:
-        embedding_db = pickle.load(f)
+    if 'embedding_db' not in globals():
+        if not os.path.exists(embeddings_path):
+            raise FileNotFoundError(f"Embeddings file not found: {embeddings_path}")
+        with open(embeddings_path, 'rb') as f:
+            embedding_db = pickle.load(f)
 
     # Haar cascade for face detection
     face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
@@ -46,12 +46,26 @@ try:
     if frame is None:
         raise ValueError(f"Failed to load image from {image_path}")
 
-    # Invert the image horizontally
-    frame = cv2.flip(frame, 1)
+    # Resize the frame to a smaller resolution for faster processing
+    frame = cv2.resize(frame, (320, 240))  # Resize to 320x240 for faster processing
+
+    # Invert the captured frame horizontally
+    inverted_frame = cv2.flip(frame, 1)
+
+    # Save the inverted captured frame
+    captured_frame_path = '../captured_frames/captured_frame_inverted.png'
+    cv2.imwrite(captured_frame_path, inverted_frame)
 
     # Convert to grayscale for face detection
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5)
+    gray = cv2.cvtColor(inverted_frame, cv2.COLOR_BGR2GRAY)
+
+    # Optimize face detection parameters
+    faces = face_cascade.detectMultiScale(
+        gray,
+        scaleFactor=1.2,  # Slightly increase scaleFactor for faster detection
+        minNeighbors=3,   # Reduce minNeighbors for faster detection
+        minSize=(30, 30)  # Set a minimum face size to skip small regions
+    )
 
     if len(faces) == 0:
         print(json.dumps({'error': 'No faces detected in the image'}))
@@ -59,11 +73,11 @@ try:
 
     results = []
     for (x, y, w, h) in faces:
-        # Extract the face region
-        face_img = frame[y:y+h, x:x+w]
+        # Crop the face region
+        face_img = inverted_frame[y:y+h, x:x+w]
         face_pil = Image.fromarray(cv2.resize(face_img, (160, 160))).convert('RGB')
 
-        # Generate embeddings for the face
+        # Generate embeddings for the cropped face
         embedding = embedder.embeddings([np.array(face_pil)])[0]
 
         # Compare embeddings with the database
@@ -79,9 +93,9 @@ try:
             label = f"Unauthorized ({confidence:.2f})"
             color = (0, 0, 255)  # Red for unauthorized
 
-        # Draw bounding box and label on the frame
-        cv2.rectangle(frame, (x, y), (x+w, y+h), color, 2)
-        cv2.putText(frame, label, (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, color, 2)
+        # Draw bounding box and label on the original frame
+        cv2.rectangle(inverted_frame, (x, y), (x+w, y+h), color, 2)
+        cv2.putText(inverted_frame, label, (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, color, 2)
 
         # Append the result
         results.append({
@@ -89,14 +103,9 @@ try:
             'confidence': float(confidence)  # Convert float32 to native Python float
         })
 
-    # Save the processed frame (optional, for debugging)
-    processed_frame_path = '../captured_frames/processed_frame.png'
-    cv2.imwrite(processed_frame_path, frame)
-
-    # Save the JSON response to a file (optional, for debugging)
-    json_output_path = '../logs/prediction_output.json'
-    with open(json_output_path, 'w') as json_file:
-        json.dump({'prediction': results}, json_file, indent=4)
+    # Save the inverted processed frame
+    processed_frame_path = '../captured_frames/processed_frame_inverted.png'
+    cv2.imwrite(processed_frame_path, inverted_frame)
 
     # Return results as JSON
     print(json.dumps({'prediction': results}))

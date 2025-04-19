@@ -18,3 +18,294 @@
 [1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 7s/step
 [1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 7s/step
 {"prediction": [{"label": "Ejie Florida (0.76)", "confidence": 0.7566874027252197}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 6s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m6s[0m 6s/step
+{"prediction": [{"label": "Ejie Florida (0.81)", "confidence": 0.8130463361740112}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Ejie Florida (0.83)", "confidence": 0.8266506791114807}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Ejie Florida (0.83)", "confidence": 0.8281726837158203}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Ejie Florida (0.79)", "confidence": 0.7866983413696289}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Ejie Florida (0.86)", "confidence": 0.8590647578239441}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Ejie Florida (0.85)", "confidence": 0.8485317230224609}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Ejie Florida (0.87)", "confidence": 0.8661815524101257}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Ejie Florida (0.82)", "confidence": 0.8162860870361328}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Ejie Florida (0.85)", "confidence": 0.8488112688064575}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Ejie Florida (0.80)", "confidence": 0.7975996732711792}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Unauthorized (0.69)", "confidence": 0.691545844078064}]}
+{"error": "No faces detected in the image"}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Ejie Florida (0.80)", "confidence": 0.8001953363418579}]}
+{"error": "No faces detected in the image"}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Ejie Florida (0.81)", "confidence": 0.8147783875465393}]}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Unauthorized (0.13)", "confidence": 0.1330556422472}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Unauthorized (0.04)", "confidence": 0.0436980277299881}]}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Ejie Florida (0.80)", "confidence": 0.7958624362945557}]}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 4s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m4s[0m 4s/step
+{"prediction": [{"label": "Ejie Florida (0.79)", "confidence": 0.787480354309082}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Ejie Florida (0.81)", "confidence": 0.8128382563591003}]}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 4s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m4s[0m 4s/step
+{"prediction": [{"label": "Ejie Florida (0.80)", "confidence": 0.8029073476791382}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 4s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m4s[0m 4s/step
+{"prediction": [{"label": "Ejie Florida (0.82)", "confidence": 0.8183332681655884}]}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 4s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m4s[0m 4s/step
+{"prediction": [{"label": "Ejie Florida (0.75)", "confidence": 0.7510517835617065}]}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Unauthorized (0.58)", "confidence": 0.5802519917488098}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 4s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m4s[0m 4s/step
+{"prediction": [{"label": "Unauthorized (0.13)", "confidence": 0.12525799870491028}]}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Unauthorized (0.60)", "confidence": 0.6020684838294983}]}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 4s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m4s[0m 4s/step
+{"prediction": [{"label": "Unauthorized (0.08)", "confidence": 0.0799085795879364}]}
+{"error": "No faces detected in the image"}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Unauthorized (0.07)", "confidence": 0.06699094921350479}]}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Ejie Florida (0.77)", "confidence": 0.7706597447395325}]}
+{"error": "No faces detected in the image"}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Unauthorized (0.01)", "confidence": 0.010709177702665329}]}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Ejie Florida (0.83)", "confidence": 0.829788088798523}]}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Ejie Florida (0.81)", "confidence": 0.8115219473838806}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Ejie Florida (0.81)", "confidence": 0.8105911016464233}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Ejie Florida (0.77)", "confidence": 0.7716473340988159}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Ejie Florida (0.73)", "confidence": 0.7333939671516418}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 4s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m4s[0m 4s/step
+{"prediction": [{"label": "Ejie Florida (0.80)", "confidence": 0.7987449765205383}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 4s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m4s[0m 4s/step
+{"prediction": [{"label": "Ejie Florida (0.79)", "confidence": 0.7916135191917419}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Ejie Florida (0.79)", "confidence": 0.7925440073013306}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 7s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 7s/step
+{"prediction": [{"label": "Ejie Florida (0.82)", "confidence": 0.8217852115631104}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 9s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m9s[0m 9s/step
+{"prediction": [{"label": "Ejie Florida (0.81)", "confidence": 0.8104193806648254}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 7s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 7s/step
+{"prediction": [{"label": "Ejie Florida (0.81)", "confidence": 0.8104193806648254}]}
