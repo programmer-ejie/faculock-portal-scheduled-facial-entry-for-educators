@@ -6,6 +6,8 @@
             $faculty_password = $_POST['faculty_password'];
 
             if($faculty_gmail == "admin@gmail.com" && $faculty_password = "admin"){
+                $sqlLogs = "INSERT INTO `logs` (user_id,header_title,message) VALUES ('0','Admin Login','Admin has successfully logged into the system.')";
+                mysqli_query($conn,$sqlLogs);
                 header("Location: ../admin/dashboard.php");
             }else{
               $sql = "SELECT * FROM users WHERE status = 'Approved'";
@@ -19,6 +21,8 @@
                     while($fetch = mysqli_fetch_assoc($query)){
                         if($faculty_gmail == $fetch['faculty_gmail']){
                             if($faculty_password == $fetch['faculty_password']){
+                                $sqlLogs = "INSERT INTO `logs` (user_id,header_title,message) VALUES ('{$fetch['id']}','Faculty Login','Faculty member {$fetch['faculty_name']} has successfully logged into the system.')";
+                                mysqli_query($conn,$sqlLogs);
                                 header("Location: ../faculty/dashboard.php");
                                 exit();
                             }else{

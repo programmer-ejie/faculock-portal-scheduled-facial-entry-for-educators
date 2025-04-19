@@ -1,3 +1,7 @@
+<?php
+session_start();
+include('../db_connection/conn.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <!-- [Head] start -->
@@ -375,6 +379,45 @@
             <div class="row">
                     <!-- start sa code -->
 
+                    <?php
+                        $sql = "SELECT * FROM notifications ORDER BY id DESC";
+                        $result = mysqli_query($conn, $sql);
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                // Fetch user details
+                                $sqlUser = "SELECT * FROM users WHERE id = {$row['user_id']}";
+                                $resultUser = mysqli_query($conn, $sqlUser);
+                                $user = mysqli_fetch_assoc($resultUser);
+
+                                // Convert timestamp to readable date
+                                $notifDate = date("F j, Y, g:i a", strtotime($row['notif_date']));
+                        ?>
+                        <div class="card">
+                            <div class="card-header d-flex align-items-center justify-content-between">
+                                <!-- User Picture and Header Title -->
+                                <div class="d-flex align-items-center">
+                                    <img src="../images/user.avif" alt="User Picture" class="rounded-circle me-2" style="width: 40px; height: 40px;">
+                                    <h6 class="mb-0"><?php echo $row['header_title']; ?></h6>
+                                </div>
+                                <!-- Notification Date -->
+                                <small class="text-muted"><?php echo $notifDate; ?></small>
+                            </div>
+                            <div class="card-body btn-page">
+                                <!-- Notification Message -->
+                                <p><?php echo $row['message']; ?></p>
+                                <br>
+                                <!-- User Name -->
+                                <small class="text-muted">- <?php echo $user['faculty_name']; ?></small>
+                            </div>
+                        </div>
+                        <?php
+                            }
+                        } else {
+                            echo '<p>No notifications found.</p>';
+                        }
+                        ?>
+
+                  
                     <!-- end sa code     -->
             </div>
     </div>
