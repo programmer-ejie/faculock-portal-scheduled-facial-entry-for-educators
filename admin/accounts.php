@@ -99,8 +99,8 @@
 
 <li class="pc-item">
   <a href="notification.php" class="pc-link">
-    <span class="pc-micon"><i class="ti ti-bell"></i></span> <!-- Icon for Notification -->
-    <span class="pc-mtext">Notification</span>
+    <span class="pc-micon"><i class="ti ti-bell"></i></span> <!-- Icon for User  Notification -->
+    <span class="pc-mtext">User  Notification</span>
   </a>
 </li>
 
@@ -307,7 +307,7 @@
 
                 <a href="notification.php" class="dropdown-item">
                 <i class="ti ti-bell"></i>
-                <span>Notification</span>
+                <span>User  Notification</span>
                 </a>
 
                 <a href="logs.php" class="dropdown-item">

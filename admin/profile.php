@@ -96,8 +96,8 @@
 
 <li class="pc-item">
   <a href="notification.php" class="pc-link">
-    <span class="pc-micon"><i class="ti ti-bell"></i></span> <!-- Icon for Notification -->
-    <span class="pc-mtext">Notification</span>
+    <span class="pc-micon"><i class="ti ti-bell"></i></span> <!-- Icon for User  User  Notification -->
+    <span class="pc-mtext">User  User  Notification</span>
   </a>
 </li>
 
@@ -681,7 +681,7 @@
                                 <div class="d-flex align-items-center">
                                   <i class="ti ti-mail me-3 f-36 text-primary"></i>
                                   <div>
-                                    <h5 class="mb-1">Setup Email Notification</h5>
+                                    <h5 class="mb-1">Setup Email User  User  Notification</h5>
                                     <p class="text-muted text-sm mb-0">Turn on email notification to get updates through email</p>
                                   </div>
                                 </div>
@@ -695,7 +695,7 @@
                                 <div class="d-flex align-items-center">
                                   <i class="ti ti-notification me-3 f-36 text-primary"></i>
                                   <div>
-                                    <h5 class="mb-1">Update System Notification</h5>
+                                    <h5 class="mb-1">Update System User  User  Notification</h5>
                                     <p class="text-muted text-sm mb-0">You will be notified when customer order any product</p>
                                   </div>
                                 </div>

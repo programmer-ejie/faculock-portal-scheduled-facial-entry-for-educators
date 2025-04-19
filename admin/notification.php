@@ -3,7 +3,7 @@
 <!-- [Head] start -->
 
 <head>
-  <title>Notification | FacuLock</title>
+  <title>User  User  Notification | FacuLock</title>
   <!-- [Meta] -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -96,8 +96,8 @@
 
 <li class="pc-item">
   <a href="notification.php" class="pc-link">
-    <span class="pc-micon"><i class="ti ti-bell"></i></span> <!-- Icon for Notification -->
-    <span class="pc-mtext">Notification</span>
+    <span class="pc-micon"><i class="ti ti-bell"></i></span> <!-- Icon for User  User  Notification -->
+    <span class="pc-mtext">User Notification</span>
   </a>
 </li>
 
@@ -304,7 +304,7 @@
 
                 <a href="notification.php" class="dropdown-item">
                 <i class="ti ti-bell"></i>
-                <span>Notification</span>
+                <span>User Notification</span>
                 </a>
 
                 <a href="logs.php" class="dropdown-item">
@@ -364,7 +364,7 @@
               <ul class="breadcrumb">
                 <li class="breadcrumb-item"><a href="../dashboard/index.html">Admin</a></li>
                 <li class="breadcrumb-item"><a href="javascript: void(0)">Home</a></li>
-                <li class="breadcrumb-item" aria-current="page">Notification</li>
+                <li class="breadcrumb-item" aria-current="page">User  Notification</li>
               </ul>
             </div>
           </div>
