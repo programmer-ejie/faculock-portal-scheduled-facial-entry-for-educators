@@ -21,3 +21,9 @@ Processing image: ../captured_frames/captured_frame.png
 [1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 7s/step
 [1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m7s[0m 7s/step
 {"prediction": [{"label": "Ejie Florida (0.81)", "confidence": 0.8053086400032043}]}
+Error: Failed to load image from ../captured_frames/captured_frame.png
+Error: Failed to load image from ../captured_frames/captured_frame.png
+Error: Failed to load image from ../captured_frames/captured_frame.png
+Error: Failed to load image from ../captured_frames/captured_frame.png
+Error: Failed to load image from ../captured_frames/captured_frame.png
+Error: Failed to load image from ../captured_frames/captured_frame.png
