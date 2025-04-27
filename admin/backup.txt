@@ -415,7 +415,7 @@
             </div>
             <div class="card-body pc-component">
               <!-- Video element for live camera feed -->
-              <img id="liveCamera" crossorigin="anonymous" src="http://192.168.3.59/stream" class="img-fluid d-block w-100" style="border: 1px solid #ddd; transform: scaleX(-1);" />
+              <img id="liveCamera" crossorigin="anonymous" src="http://192.168.64.49/stream" class="img-fluid d-block w-100" style="border: 1px solid #ddd; transform: scaleX(-1);" />
 <p class="text-muted mt-2">Ensure your browser has access to the camera.</p>
 <canvas id="capturedFrame" class="d-none"></canvas>
 <div id="countdown">5</div>

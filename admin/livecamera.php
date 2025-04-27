@@ -415,7 +415,7 @@
             </div>
             <div class="card-body pc-component">
               <!-- Video element for live camera feed -->
-              <img id="liveCamera" crossorigin="anonymous" src="http://192.168.3.59/stream" class="img-fluid d-block w-100" style="border: 1px solid #ddd; transform: scaleX(-1);" />
+              <img id="liveCamera" crossorigin="anonymous" src="http://192.168.64.49/stream" class="img-fluid d-block w-100" style="border: 1px solid #ddd; transform: scaleX(-1);" />
 <p class="text-muted mt-2">Ensure your browser has access to the camera.</p>
 <canvas id="capturedFrame" class="d-none"></canvas>
 <div id="countdown">5</div>
@@ -488,14 +488,45 @@ async function captureFrame() {
 
         const data = await response.json();
 
-        if (data.error) {
-            predictionResult.textContent = `Error: ${data.error}`;
-        } else if (data.prediction && data.prediction.length > 0) {
-            const result = data.prediction[0];
-            predictionResult.textContent = `Status: ${result.label}, Confidence: ${result.confidence.toFixed(2)}`;
-        } else {
-            predictionResult.textContent = 'No prediction results.';
-        }
+        if (data.prediction && data.prediction.length > 0) {
+              const result = data.prediction[0];
+              const label = result.label;
+              const confidence = result.confidence.toFixed(2);
+
+              if (label.toLowerCase() !== 'unauthorized') {
+                  const scheduleResponse = await fetch('../backend/check_schedule.php', {
+                      method: 'POST',
+                      headers: {
+                          'Content-Type': 'application/json',
+                      },
+                      body: JSON.stringify({ name: label }),
+                  });
+
+                  const scheduleData = await scheduleResponse.json();
+
+                  if (scheduleData.status === 'granted') {
+                      predictionResult.innerHTML = `
+                          <strong>Status:</strong> Access Granted ✅<br>
+                          <strong>Faculty:</strong> ${label}<br>
+                          <strong>Confidence:</strong> ${confidence}<br>
+                          <strong>Room:</strong> ${scheduleData.room}<br>
+                          <strong>Time:</strong> ${scheduleData.time}
+                      `;
+                  } else {
+                      predictionResult.innerHTML = `
+                          <strong>Status:</strong> Access Denied ❌<br>
+                          <strong>Faculty:</strong> ${label}<br>
+                          <strong>Confidence:</strong> ${confidence}<br>
+                          <em>${scheduleData.message}</em>
+                      `;
+                  }
+              } else {
+                  predictionResult.innerHTML = `<strong>Status:</strong> Access Denied ❌<br><em>Unauthorized individual.</em>`;
+              }
+          } else {
+              predictionResult.textContent = 'No prediction results.';
+          }
+
     } catch (error) {
         console.error('Error:', error);
         predictionResult.textContent = 'Error processing the frame.';

@@ -5,7 +5,7 @@
             $faculty_gmail = $_POST['faculty_gmail'];
             $faculty_password = $_POST['faculty_password'];
 
-            if($faculty_gmail == "admin@gmail.com" && $faculty_password = "admin"){
+            if($faculty_gmail == "admin@gmail.com" && $faculty_password == "admin"){
                 $sqlLogs = "INSERT INTO `logs` (user_id,header_title,message) VALUES ('0','Admin Login','Admin has successfully logged into the system.')";
                 mysqli_query($conn,$sqlLogs);
                 header("Location: ../admin/dashboard.php");

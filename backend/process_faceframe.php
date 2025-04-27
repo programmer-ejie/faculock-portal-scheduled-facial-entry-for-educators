@@ -8,14 +8,14 @@ if (!isset($request['image'])) {
 
 $imageData = $request['image'];
 
-// Validate and extract base64 image data
+
 if (strpos($imageData, 'base64,') === false) {
     echo json_encode(['error' => 'Invalid image data format']);
     exit;
 }
 
 $base64 = explode(',', $imageData, 2)[1];
-$base64 = str_replace(' ', '+', $base64); // Handle URL-encoded spaces
+$base64 = str_replace(' ', '+', $base64); 
 $decoded = base64_decode($base64);
 
 if (!$decoded) {
@@ -25,26 +25,26 @@ if (!$decoded) {
 
 $imagePath = '../captured_frames/captured_frame.png';
 
-// Save the image to the server
+
 if (!file_put_contents($imagePath, $decoded)) {
     echo json_encode(['error' => 'Failed to save the image']);
     exit;
 }
 
-// Log file size for debugging
+
 $size = filesize($imagePath);
 file_put_contents('../logs/image_debug.log', "Saved image size: $size bytes\n", FILE_APPEND);
 
-// Call the Python script
-$pythonPath = 'C:\\Users\\Asus\\AppData\\Local\\Programs\\Python\\Python312\\python.exe'; // Your Python path
+
+$pythonPath = 'C:\\Users\\Asus\\AppData\\Local\\Programs\\Python\\Python312\\python.exe'; 
 $scriptPath = '../python/process_image.py';
 $command = escapeshellcmd("$pythonPath $scriptPath $imagePath 2>&1");
 $output = shell_exec($command);
 
-// Log raw output
+
 file_put_contents('../logs/python_raw_output.log', $output, FILE_APPEND);
 
-// Try to extract JSON from the output
+
 $jsonStart = strpos($output, '{');
 $jsonEnd = strrpos($output, '}');
 
@@ -55,14 +55,14 @@ if ($jsonStart !== false && $jsonEnd !== false) {
     $response = null;
 }
 
-// Handle Python script errors
+
 if ($response === null) {
     file_put_contents('../logs/python_error.log', "Failed to parse response: $output\n", FILE_APPEND);
     echo json_encode(['error' => 'Python script error', 'details' => $output]);
     exit;
 }
 
-// Return JSON response to frontend
+
 header('Content-Type: application/json');
 echo json_encode($response);
 ?>
