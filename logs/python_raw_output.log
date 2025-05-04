@@ -599,3 +599,50 @@
 [1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 4s/step
 [1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m4s[0m 4s/step
 {"prediction": [{"label": "Ejie Florida", "confidence": 0.8121678829193115}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Ejie Florida", "confidence": 0.813549280166626}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 4s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m4s[0m 4s/step
+{"prediction": [{"label": "Unauthorized (0.38)", "confidence": 0.3789861798286438}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Ejie Florida", "confidence": 0.75581955909729}]}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+{"error": "No faces detected in the image"}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 22s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m22s[0m 22s/step
+{"prediction": [{"label": "Unauthorized (0.72)", "confidence": 0.718738317489624}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 9s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m9s[0m 9s/step
+{"prediction": [{"label": "Unauthorized (0.72)", "confidence": 0.718738317489624}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Claire Sacro", "confidence": 0.8488976955413818}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Unauthorized (0.74)", "confidence": 0.7444850206375122}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Claire Sacro", "confidence": 0.8018437027931213}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 3s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m3s[0m 3s/step
+{"prediction": [{"label": "Claire Sacro", "confidence": 0.8323320746421814}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 11s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m11s[0m 11s/step
+{"prediction": [{"label": "Ejie Florida", "confidence": 0.781096339225769}]}
+
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m0s[0m 8s/step
+[1m1/1[0m [32m━━━━━━━━━━━━━━━━━━━━[0m[37m[0m [1m8s[0m 8s/step
+{"prediction": [{"label": "Ejie Florida", "confidence": 0.7836606502532959}]}

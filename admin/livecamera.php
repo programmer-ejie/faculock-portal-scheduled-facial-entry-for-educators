@@ -15,6 +15,7 @@
   <meta name="keywords" content="Mantis, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Bootstrap Admin Template">
   <meta name="author" content="CodedThemes">
 
+
   <!-- [Favicon] icon -->
   <link rel="shortcut icon" type="image/png" href="../template/auth/assets/images/logos/seodashlogo.png" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap" id="main-font-link">
@@ -415,8 +416,26 @@
             </div>
             <div class="card-body pc-component">
               <!-- Video element for live camera feed -->
-              <img id="liveCamera" crossorigin="anonymous" src="http://192.168.64.49/stream" class="img-fluid d-block w-100" style="border: 1px solid #ddd; transform: scaleX(-1);" />
-<p class="text-muted mt-2">Ensure your browser has access to the camera.</p>
+              <img id="liveCamera"
+                  crossorigin="anonymous"
+                  src="http://192.168.3.59/frame.jpg"
+                  class="img-fluid d-block w-100"
+                  style="border: 1px solid #ddd; transform: scaleX(-1);" />
+
+              <script>
+                const img = document.getElementById('liveCamera');
+
+                setInterval(() => {
+                  const buffer = new Image();
+                  buffer.crossOrigin = "anonymous";
+                  buffer.onload = () => {
+                    img.src = buffer.src;
+                  };
+                  buffer.src = 'http://192.168.3.59/frame.jpg?t=' + new Date().getTime();
+                }, 100); // Refresh every 200ms
+              </script>
+
+              <p class="text-muted mt-2">Ensure your browser has access to the camera.</p>
 <canvas id="capturedFrame" class="d-none"></canvas>
 <div id="countdown">5</div>
 <p id="predictionResult" class="mt-3 text-center">------------------------------------------------------------------</p>
@@ -512,6 +531,11 @@ async function captureFrame() {
                           <strong>Room:</strong> ${scheduleData.room}<br>
                           <strong>Time:</strong> ${scheduleData.time}
                       `;
+
+                       fetch('http://192.168.3.65/open')  // Replace with ESP32 IP
+                      .then(response => response.text())
+                      .then(data => console.log('ESP32 response:', data))
+                      .catch(error => console.error('ESP32 request failed:', error));
                   } else {
                       predictionResult.innerHTML = `
                           <strong>Status:</strong> Access Denied ❌<br>
